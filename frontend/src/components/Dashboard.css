@@ -1,0 +1,117 @@
+.dashboard {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+
+.dashboard-header {
+  text-align: center;
+  padding: 60px 20px 40px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.dashboard-title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #e8d5b7;
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+}
+
+.dashboard-subtitle {
+  font-size: 1.1rem;
+  color: #9a8fa0;
+  margin-bottom: 32px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #7c3aed, #4f46e5);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+}
+.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
+.btn-large { padding: 14px 36px; font-size: 1.1rem; }
+
+.dashboard-main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.dashboard-empty {
+  text-align: center;
+  color: #9a8fa0;
+  font-size: 1.1rem;
+  padding: 60px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.story-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px;
+  padding: 20px;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.2s, transform 0.15s, border-color 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.story-card:hover {
+  background: rgba(255,255,255,0.09);
+  border-color: rgba(124,58,237,0.5);
+  transform: translateY(-2px);
+}
+
+.story-card-title {
+  font-size: 1.1rem;
+  color: #e8d5b7;
+  margin-bottom: 6px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.story-card-meta {
+  font-size: 0.78rem;
+  color: #6b6b8a;
+  margin-bottom: 10px;
+  font-family: sans-serif;
+}
+
+.story-card-snippet {
+  font-size: 0.88rem;
+  color: #9a8fa0;
+  line-height: 1.5;
+}
+
+.story-card-delete {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s;
+  color: #e8d5b7;
+}
+.story-card:hover .story-card-delete { opacity: 0.6; }
+.story-card-delete:hover { opacity: 1 !important; }
