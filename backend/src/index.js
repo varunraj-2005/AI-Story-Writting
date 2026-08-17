@@ -15,7 +15,21 @@ if (!process.env.GEMINI_API_KEY) {
 // Initialize Gemini client
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-app.use(cors({ origin: 'http://localhost:3000' }));
+const allowedOrigins = [
+  'http://localhost:3000',
+  process.env.FRONTEND_URL, // e.g. https://your-app.vercel.app
+].filter(Boolean);
+
+app.use(cors({
+  origin: (origin, callback) => {
+    // allow server-to-server / curl (no origin header) and listed origins
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error(`CORS: origin ${origin} not allowed`));
+    }
+  },
+}));
 app.use(express.json({ limit: '2mb' }));
 
 // Reject any request that tries to pass an API key
