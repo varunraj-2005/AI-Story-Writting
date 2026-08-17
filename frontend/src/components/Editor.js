@@ -91,7 +91,8 @@ export default function Editor({ storyId, onHome }) {
     const baseContent = useContentBefore ? contentBeforeGen : content;
 
     try {
-      const response = await fetch('/api/continue-story', {
+      const base = process.env.REACT_APP_API_URL || '';
+      const response = await fetch(`${base}/api/continue-story`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ storyText: baseContent, styleChoice: style }),
