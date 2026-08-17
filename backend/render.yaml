@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: ai-story-backend
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false        # set manually in Render dashboard
+      - key: FRONTEND_URL
+        sync: false        # set to your Vercel URL, e.g. https://your-app.vercel.app
+      - key: PORT
+        value: 3001
