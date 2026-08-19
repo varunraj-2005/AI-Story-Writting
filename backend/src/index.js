@@ -6,10 +6,13 @@ const { GoogleGenerativeAI } = require('@google/generative-ai');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Validate API key at startup
+// Validate required env vars at startup
 if (!process.env.GEMINI_API_KEY) {
-  console.error('FATAL: GEMINI_API_KEY environment variable is not set. Exiting.');
+  console.error('FATAL: GEMINI_API_KEY is not set.');
   process.exit(1);
+}
+if (!process.env.FRONTEND_URL) {
+  console.warn('WARNING: FRONTEND_URL is not set — CORS will only allow localhost:3000');
 }
 
 // Initialize Gemini client
@@ -47,6 +50,11 @@ const STYLE_INSTRUCTIONS = {
   'build tension': 'Continue the story by building suspense and tension, raising the stakes.',
 };
 
+// Health check — open https://your-backend.onrender.com/health to verify it's alive
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok', model: 'gemini-1.5-flash' });
+});
+
 // POST /api/continue-story — streaming SSE endpoint
 app.post('/api/continue-story', async (req, res) => {
   const { storyText, styleChoice } = req.body;
@@ -67,7 +75,7 @@ app.post('/api/continue-story', async (req, res) => {
   res.flushHeaders();
 
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-3.5-flash' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
     const result = await model.generateContentStream(prompt);
 
     for await (const chunk of result.stream) {
