@@ -52,7 +52,7 @@ const STYLE_INSTRUCTIONS = {
 
 // Health check — open https://your-backend.onrender.com/health to verify it's alive
 app.get('/health', (req, res) => {
-  res.json({ status: 'ok', model: 'gemini-1.5-flash' });
+  res.json({ status: 'ok', model: 'gemini-3.5-flash' });
 });
 
 // POST /api/continue-story — streaming SSE endpoint
@@ -75,7 +75,7 @@ app.post('/api/continue-story', async (req, res) => {
   res.flushHeaders();
 
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-3.5-flash' });
     const result = await model.generateContentStream(prompt);
 
     for await (const chunk of result.stream) {
